@@ -3,6 +3,7 @@ import gradio as gr
 
 
 url = 'http://hostname.domain.com:11434/api/generate'
+
 model = 'llama3:latest' 
 context = [] 
 
@@ -21,7 +22,7 @@ def generate(prompt, context, top_k, top_p, temp):
                              'top_p': temp
                          }
                      },
-                     stream=True)
+                     stream=False)
     r.raise_for_status()
 
  
