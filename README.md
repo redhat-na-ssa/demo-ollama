@@ -1,1 +1,2 @@
 # ollama
+Experiment with ollama
