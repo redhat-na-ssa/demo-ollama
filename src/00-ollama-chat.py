@@ -8,7 +8,7 @@ context = []
 
 import gradio as gr
 
-#Call Ollama API
+# Call the Ollama API
 def generate(prompt, context, top_k, top_p, temp):
     r = requests.post(url,
                      json={
