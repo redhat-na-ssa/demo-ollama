@@ -37,3 +37,8 @@ spec:
       - name: ollama-storage
         persistentVolumeClaim:
           claimName: ollama-storage
+      tolerations:
+        - key: "nvidia.com/gpu"
+          operator: "Equal"
+          effect: "NoSchedule"
+          value: "true"
