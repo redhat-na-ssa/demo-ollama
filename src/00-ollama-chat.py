@@ -1,10 +1,14 @@
 import requests, json
 import gradio as gr
-
+import os
 
 url = 'http://hostname.domain.com:11434/api/generate'
 
-model = 'llama3:latest' 
+url = os.getenv('OLLAMA_HOST', 'http://ollama.ollama:11434')
+url = url + '/api/generate'
+
+# This model name should match what model was pulled from the Ollama API.
+model = 'llama3.2:latest' 
 context = [] 
 
 import gradio as gr
