@@ -16,7 +16,7 @@ spec:
         app: ollama-serve
     spec:
       containers:
-      - image: quay.io/wcaban/ollama:latest
+      - image: quay.io/wcaban/ollama:v0.3.14
         imagePullPolicy: Always
         name: container
         ports:
