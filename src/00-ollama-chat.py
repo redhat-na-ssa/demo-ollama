@@ -8,7 +8,7 @@ url = os.getenv('OLLAMA_HOST', 'http://ollama.ollama:11434')
 url = url + '/api/generate'
 
 # This model name should match what model was pulled from the Ollama API.
-model = 'llama3.2:latest' 
+model = 'granite3-dense:8bllama3.2' 
 context = [] 
 
 import gradio as gr

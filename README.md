@@ -16,7 +16,7 @@ OLLAMA_HOST=http://$(oc get route -n ollama --output=custom-columns=':.spec.host
 ```
 
 ```bash
-curl $OLLAMA_HOST/api/pull -d '{"name": "llama3.2"}'
+curl $OLLAMA_HOST/api/pull -d '{"name": "granite3-dense:8b"}'
 curl $OLLAMA_HOST/api/pull -d '{"name": "all-minilm"}'
 ```
 
@@ -29,7 +29,7 @@ curl $OLLAMA_HOST/api/embed -d '{ "model": "all-minilm", "input": "hello" }'
 ```
 
 ```bash
-curl $OLLAMA_HOST/api/generate -d '{"model": "llama3.2", "prompt": "hello", "stream": false }'
+curl $OLLAMA_HOST/api/generate -d '{"model": "granite3-dense:8b", "prompt": "hello", "stream": false }'
 ```
 
 ```bash
