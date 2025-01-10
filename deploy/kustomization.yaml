@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: ollama
 
+commonlabels:
+  app: ollama
+
 resources:
   - deployment.yaml
   - namespace.yaml

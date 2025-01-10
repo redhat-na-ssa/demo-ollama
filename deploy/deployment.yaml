@@ -1,31 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ollama-serve
+  name: ollama
   namespace: ollama
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ollama-serve
+      app: ollama
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: ollama-serve
+        app: ollama
     spec:
       containers:
-      - image: ghcr.io/redhat-na-ssa/ollama:latest
+      - name: serve 
+        image: ghcr.io/redhat-na-ssa/ollama:latest
         imagePullPolicy: Always
         env:
         # - name: HOME
         #   value: /ollama
-        # - name: OLLAMA_MODELS
-        #   value: /ollama/models
         # - name: OLLAMA_HOST
         #   value: 0.0.0.0:11434
-        name: ollama-serve
         ports:
         - containerPort: 11434
           protocol: TCP
@@ -36,12 +34,12 @@ spec:
         #     nvidia.com/gpu: "1"
         volumeMounts:
         - mountPath: /ollama
-          name: ollama-storage
+          name: storage
       restartPolicy: Always
       volumes:
-      - name: ollama-storage
+      - name: storage
         persistentVolumeClaim:
-          claimName: ollama-storage
+          claimName: ollama
       tolerations:
       - key: "nvidia.com/gpu"
         operator: "Equal"
