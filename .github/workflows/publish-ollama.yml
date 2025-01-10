@@ -1,0 +1,74 @@
+name: Publish ollama
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:  # yamllint disable-line rule:truthy
+  # schedule:
+  #   - cron: '5 4 * * 6'
+  push:
+    branches: ["main"]
+    # Publish semver tags as releases.
+    tags: ["v*.*.*"]
+    paths:
+    - ollama/**
+    # - .github/workflows/**
+  pull_request:
+    branches: ["main"]
+    paths:
+    - ollama/**
+    # - .github/workflows/**
+
+env:
+  IMAGE_NAME: ollama
+  IMAGE_VERSION: 6.22.2
+  GHCR_REGISTRY: ghcr.io
+  GHCR_USER: ${{ github.repository_owner }}
+  GHCR_IMAGE: ${GHCR_REGISTRY}/${GHCR_USER}/${IMAGE_NAME}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.2
+
+      - name: Prepare
+        id: prep
+        run: |
+          #VERSION=${GITHUB_REF#refs/tags/v}
+          VERSION=${{ env.IMAGE_VERSION }}
+          MINOR=${VERSION%.*}
+          MAJOR=${VERSION%%.*}
+          GHCR_IMAGE=${{ env.GHCR_IMAGE }}
+          TAGS="${TAGS},${GHCR_IMAGE}:${MAJOR},${GHCR_IMAGE}:${MINOR}"
+          TAGS="${TAGS},${GHCR_IMAGE}:${VERSION},${GHCR_IMAGE}:latest"
+          echo "name=${{ env.IMAGE_NAME }}" >> $GITHUB_OUTPUT
+          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "ghcr_image=${GHCR_IMAGE}" >> $GITHUB_OUTPUT
+
+      # https://github.com/docker/login-action
+      - name: Log into GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567
+        with:
+          registry: ${{ env.GHCR_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # https://github.com/docker/build-push-action
+      - name: Build and push
+        uses: docker/build-push-action@b32b51a8eda65d6793cd0494a773d4f6bcef32dc
+        with:
+          context: ${{ steps.prep.outputs.name }}
+          file: ${{ steps.prep.outputs.name }}/Dockerfile.build
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.prep.outputs.tags }}
+          labels: org.opencontainers.image.version=${{ steps.prep.outputs.version }}
