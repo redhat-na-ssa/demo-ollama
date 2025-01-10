@@ -1,0 +1,14 @@
+---
+version: '3'
+services:
+  ollama:
+    image: quay.io/wcaban/ollama:v0.3.14
+    env:
+      - OLLAMA_HOST: '0.0.0.0:11434'
+    ports:
+      - 11434:11434
+    volumes:
+      - ollama-data:/.ollama
+    restart: on-failure:0
+volumes:
+  ollama-data:
