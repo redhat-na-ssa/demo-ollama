@@ -41,7 +41,7 @@ View available models
 curl ${OLLAMA_HOST}/api/tags | jq
 ```
 
-Run gradio chat client
+Run gradio chat client (locally)
 
 ```sh
 python -m venv venv
@@ -49,5 +49,5 @@ python -m venv venv
 pip install -r requirements.txt
 
 export OLLAMA_HOST
-python client/00-ollama-chat.py
+python client/app.py
 ```
