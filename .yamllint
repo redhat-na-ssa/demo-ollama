@@ -3,7 +3,8 @@ extends: default
 rules:
   # comments-indentation: disable
   document-start: disable
-  # line-length: disable
+  line-length:
+    level: warning
   indentation:
     indent-sequences: whatever
     # ignore: |

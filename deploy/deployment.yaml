@@ -19,10 +19,10 @@ spec:
       - image: quay.io/wcaban/ollama:v0.3.14
         imagePullPolicy: Always
         env:
-          name: OLLAMA_MODELS
-          value: /ollama/models
-          name: OLLAMA_HOST
-          value: 0.0.0.0:11434
+          - name: OLLAMA_MODELS
+            value: /ollama/models
+          - name: OLLAMA_HOST
+            value: 0.0.0.0:11434
         name: container
         ports:
           - containerPort: 11434
