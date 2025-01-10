@@ -9,7 +9,7 @@
     - `g5.2xlarge`
 
 ```sh
-oc apply -k resources/ollama
+oc apply -k deploy
 ```
 
 ## Testing
@@ -17,6 +17,8 @@ oc apply -k resources/ollama
 Localhost (compose)
 
 ```sh
+cd ollama
+podman-compose up
 OLLAMA_HOST=http://localhost:11434
 ```
 
