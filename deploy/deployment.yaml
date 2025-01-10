@@ -27,8 +27,9 @@ spec:
         ports:
         - containerPort: 11434
           protocol: TCP
-        # resources:
-        #   limits:
+        resources:
+          limits:
+            memory: 10Gi
         #     nvidia.com/gpu: "1"
         #   requests:
         #     nvidia.com/gpu: "1"
