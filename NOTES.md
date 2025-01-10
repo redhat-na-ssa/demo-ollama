@@ -25,16 +25,16 @@ echo ${OLLAMA_HOST}
 Test `minilm`
 
 ```sh
-curl ${OLLAMA_HOST}/api/pull -d '{"name": "all-minilm"}'
-curl ${OLLAMA_HOST}/api/embed -d '{ "model": "all-minilm", "input": "hello" }'
+curl -sL ${OLLAMA_HOST}/api/pull -d '{"name": "all-minilm"}'
+curl -sL ${OLLAMA_HOST}/api/embed -d '{ "model": "all-minilm", "input": "hello" }'
 ```
 
 Test `granite3-dense:8b`
 
 ```sh
 PROMPT="hello"
-curl ${OLLAMA_HOST}/api/pull -d '{"name": "granite3-dense:8b"}'
-curl ${OLLAMA_HOST}/api/generate -d '{"model": "granite3-dense:8b", "prompt": "'${PROMPT}'", "stream": false }'
+curl -sL ${OLLAMA_HOST}/api/pull -d '{"name": "granite3-dense:8b"}'
+curl -sL ${OLLAMA_HOST}/api/generate -d '{"model": "granite3-dense:8b", "prompt": "'${PROMPT}'", "stream": false }' | jq .response
 ```
 
 View available models
