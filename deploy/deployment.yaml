@@ -19,11 +19,13 @@ spec:
       - image: ghcr.io/redhat-na-ssa/ollama:latest
         imagePullPolicy: Always
         env:
-        - name: OLLAMA_MODELS
-          value: /ollama/models
-        - name: OLLAMA_HOST
-          value: 0.0.0.0:11434
-        name: container
+        # - name: HOME
+        #   value: /ollama
+        # - name: OLLAMA_MODELS
+        #   value: /ollama/models
+        # - name: OLLAMA_HOST
+        #   value: 0.0.0.0:11434
+        name: ollama-serve
         ports:
         - containerPort: 11434
           protocol: TCP
