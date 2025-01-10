@@ -16,30 +16,32 @@ spec:
         app: ollama-serve
     spec:
       containers:
-      - image: quay.io/wcaban/ollama:v0.3.14
+      - image: ghcr.io/redhat-na-ssa/ollama:latest
         imagePullPolicy: Always
         env:
-          - name: OLLAMA_MODELS
-            value: /ollama/models
-          - name: OLLAMA_HOST
-            value: 0.0.0.0:11434
+        - name: OLLAMA_MODELS
+          value: /ollama/models
+        - name: OLLAMA_HOST
+          value: 0.0.0.0:11434
         name: container
         ports:
-          - containerPort: 11434
-            protocol: TCP
-        resources:
-          requests:
-            nvidia.com/gpu: "1"
+        - containerPort: 11434
+          protocol: TCP
+        # resources:
+        #   limits:
+        #     nvidia.com/gpu: "1"
+        #   requests:
+        #     nvidia.com/gpu: "1"
         volumeMounts:
-          - mountPath: /ollama
-            name: ollama-storage
+        - mountPath: /ollama
+          name: ollama-storage
       restartPolicy: Always
       volumes:
-        - name: ollama-storage
-          persistentVolumeClaim:
-            claimName: ollama-storage
+      - name: ollama-storage
+        persistentVolumeClaim:
+          claimName: ollama-storage
       tolerations:
-        - key: "nvidia.com/gpu"
-          operator: "Equal"
-          effect: "NoSchedule"
-          value: "true"
+      - key: "nvidia.com/gpu"
+        operator: "Equal"
+        effect: "NoSchedule"
+        value: "true"

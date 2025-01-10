@@ -10,3 +10,6 @@ spec:
     name: ollama
     weight: 100
   wildcardPolicy: None
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
