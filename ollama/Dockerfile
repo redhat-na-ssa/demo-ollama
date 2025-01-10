@@ -1,5 +1,5 @@
-# IMAGE=docker.io/nvidia/cuda:12.2.2-runtime-ubi9
-ARG IMAGE=docker.io/nvidia/cuda:12.3.2-devel-ubi9
+# IMAGE=docker.io/nvidia/cuda:12.6.3-runtime-ubi9
+ARG IMAGE=docker.io/nvidia/cuda:12.6.3-devel-ubi9
 FROM ${IMAGE}
 
 ENV PYTHONDONTWRITEBYTECODE 1
