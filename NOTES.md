@@ -1,4 +1,4 @@
-# Demo with ollama on Openshift
+# Demo ollama on Openshift
 
 ## Prereqs
 
@@ -12,15 +12,30 @@
 oc apply -k resources/ollama
 ```
 
-Testing
+## Testing
+
+Localhost (compose)
+
+```sh
+OLLAMA_HOST=http://localhost:11434
+```
+
+OpenShift
 
 ```sh
 OLLAMA_HOST=http://$(oc get route -n ollama --output=custom-columns=':.spec.host' --no-headers)
+echo ${OLLAMA_HOST}
 ```
 
 ```sh
-curl ${OLLAMA_HOST}/api/pull -d '{"name": "granite3-dense:8b"}'
 curl ${OLLAMA_HOST}/api/pull -d '{"name": "all-minilm"}'
+curl ${OLLAMA_HOST}/api/embed -d '{ "model": "all-minilm", "input": "hello" }'
+```
+
+```sh
+PROMPT="hello"
+curl ${OLLAMA_HOST}/api/pull -d '{"name": "granite3-dense:8b"}'
+curl ${OLLAMA_HOST}/api/generate -d '{"model": "granite3-dense:8b", "prompt": "'${PROMPT}'", "stream": false }'
 ```
 
 ```sh
@@ -28,15 +43,5 @@ curl ${OLLAMA_HOST}/api/tags | jq
 ```
 
 ```sh
-curl ${OLLAMA_HOST}/api/embed -d '{ "model": "all-minilm", "input": "hello" }'
+python client/00-ollama-chat.py
 ```
-
-```sh
-curl ${OLLAMA_HOST}/api/generate -d '{"model": "granite3-dense:8b", "prompt": "hello", "stream": false }'
-```
-
-```sh
-python src/00-ollama-chat.py
-```
-
-Visit http://localhost:7260
