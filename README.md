@@ -1,4 +1,4 @@
-# Demo ollama on Openshift
+# Demo ollama on OpenShift
 
 This repo contains information on how to deploy ollama on OpenShift.
 

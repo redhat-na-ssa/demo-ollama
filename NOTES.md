@@ -1,8 +1,8 @@
-# Demo ollama on Openshift
+# Demo ollama on OpenShift
 
-## Prereqs
+## Requirements
 
-- Openshift >= 4.16
+- OpenShift >= 4.16
 - A worker node with a GPU
   - AWS
     - `g4dn.2xlarge`
