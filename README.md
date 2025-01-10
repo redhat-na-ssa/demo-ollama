@@ -1,40 +1,25 @@
-# ollama
-## Experiment with ollama on Openshift
-### Prereqs
-- Openshift >= v4.17.x
-- A worker node with a GPU (ec2 instance types `g4dn.2xlarge` or `g5.2xlarge`)
-- 
+# Demo ollama on OpenShift
 
-```bash
-oc apply -k resources/ollama
+This repo contains information on how to deploy ollama on OpenShift.
+
+## Requirements
+
+- OpenShift >= 4.15
+- A worker node with a GPU - **Highly Recommended**
+  - AWS
+    - `g4dn.2xlarge`
+    - `g5.2xlarge`
+
+## Quickstart
+
+```sh
+oc apply -k deploy
 ```
 
-Testing
+See [Additional Info](NOTES.md)
 
-```bash
-OLLAMA_HOST=http://$(oc get route -n ollama --output=custom-columns=':.spec.host' --no-headers)
-```
+## Links
 
-```bash
-curl $OLLAMA_HOST/api/pull -d '{"name": "granite3-dense:8b"}'
-curl $OLLAMA_HOST/api/pull -d '{"name": "all-minilm"}'
-```
-
-```bash
-curl $OLLAMA_HOST/api/tags | jq
-```
-
-```bash
-curl $OLLAMA_HOST/api/embed -d '{ "model": "all-minilm", "input": "hello" }'
-```
-
-```bash
-curl $OLLAMA_HOST/api/generate -d '{"model": "granite3-dense:8b", "prompt": "hello", "stream": false }'
-```
-
-```bash
-python src/00-ollama-chat.py
-```
-
-Visit http://localhost:7260
-
+- [Github - ollama](https://github.com/ollama/ollama)
+- [docker.io - ollama container](https://hub.docker.com/r/ollama/ollama)
+- [Github - ollama UBI container](https://github.com/williamcaban/ollama-ubi)

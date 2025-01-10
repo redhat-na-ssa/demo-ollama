@@ -2,18 +2,16 @@ import requests, json
 import gradio as gr
 import os
 
-url = 'http://hostname.domain.com:11434/api/generate'
+# This model name should match what model was pulled from the Ollama API.
+model = os.getenv('OLLAMA_MODEL', 'granite3-dense:8b') 
 
-url = os.getenv('OLLAMA_HOST', 'http://ollama.ollama:11434')
+url = os.getenv('OLLAMA_HOST', 'http://localhost:11434')
 url = url + '/api/generate'
 
-# This model name should match what model was pulled from the Ollama API.
-model = 'granite3-dense:8b' 
-context = [] 
+context = []
 
 import gradio as gr
 
-# Call the Ollama API
 def generate(prompt, context, top_k, top_p, temp):
     r = requests.post(url,
                      json={
@@ -36,6 +34,7 @@ def generate(prompt, context, top_k, top_p, temp):
         body = json.loads(line)
         response_part = body.get('response', '')
         print(response_part)
+
         if 'error' in body:
             raise Exception(body['error'])
 
@@ -72,7 +71,6 @@ with block:
     """)
 
     chatbot = gr.Chatbot()
-    message = gr.Textbox(placeholder="Type here")
 
     state = gr.State()
     with gr.Row():
@@ -80,10 +78,11 @@ with block:
         top_p = gr.Slider(0.0,1.0, label="top_p", value=0.9, info=" Works together with top-k. A higher value (e.g., 0.95) will lead to more diverse text, while a lower value (e.g., 0.5) will generate more focused and conservative text. (Default: 0.9)")
         temp = gr.Slider(0.0,2.0, label="temperature", value=0.8, info="The temperature of the model. Increasing the temperature will make the model answer more creatively. (Default: 0.8)")
 
+    message = gr.Textbox(placeholder="Type here")
 
     submit = gr.Button("SEND")
 
     submit.click(chat, inputs=[message, state, top_k, top_p, temp], outputs=[chatbot, state])
 
 
-block.launch(debug=True)
+block.launch(server_port=7860, debug=False)

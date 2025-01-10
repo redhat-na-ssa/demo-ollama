@@ -1,0 +1,17 @@
+---
+version: '3'
+services:
+  ollama:
+    # build: .
+    image: ghcr.io/redhat-na-ssa/ollama:latest
+    env:
+      - OLLAMA_HOST: '0.0.0.0:11434'
+    ports:
+      - 11434:11434
+    volumes:
+      - ollama-data:/.ollama
+    restart: on-failure:0
+    # devices:
+    #   - /dev/dri/renderD128:/dev/dri/renderD128
+volumes:
+  ollama-data:
