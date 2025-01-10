@@ -1,0 +1,11 @@
+extends: default
+
+rules:
+  # comments-indentation: disable
+  document-start: disable
+  # line-length: disable
+  indentation:
+    indent-sequences: whatever
+    # ignore: |
+    #   k8s/*
+    #   openshift/*
