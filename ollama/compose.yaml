@@ -2,7 +2,8 @@
 version: '3'
 services:
   ollama:
-    image: quay.io/wcaban/ollama:v0.3.14
+    build: .
+    # image: ghcr.io/redhat-na-ssa/ollama:latest
     env:
       - OLLAMA_HOST: '0.0.0.0:11434'
     ports:
@@ -10,5 +11,7 @@ services:
     volumes:
       - ollama-data:/.ollama
     restart: on-failure:0
+    # devices:
+    #   - /dev/dri/renderD128:/dev/dri/renderD128
 volumes:
   ollama-data:

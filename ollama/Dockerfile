@@ -12,9 +12,11 @@ USER root
 
 WORKDIR /ollama
 
+ENV OLLAMA_VERSION 0.5.4
+
 RUN chmod 770 /ollama && \
     chgrp root /ollama && \
-    curl https://ollama.ai/install.sh | sh
+    curl -s https://ollama.ai/install.sh | sh
 
 EXPOSE 8080
 USER 1001
