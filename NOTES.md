@@ -1,8 +1,6 @@
 # Demo ollama on OpenShift
 
-
-
-## Testing
+## Notes
 
 Localhost (compose)
 
@@ -46,6 +44,10 @@ curl ${OLLAMA_HOST}/api/tags | jq
 Run gradio chat client
 
 ```sh
+python -m venv venv
+. venv/bin/activate
+pip install -r requirements.txt
+
 export OLLAMA_HOST
 python client/00-ollama-chat.py
 ```
