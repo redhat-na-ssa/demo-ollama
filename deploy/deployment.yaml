@@ -16,7 +16,7 @@ spec:
         app: ollama
     spec:
       containers:
-      - name: serve 
+      - name: serve
         image: ghcr.io/redhat-na-ssa/ollama:latest
         imagePullPolicy: Always
         env:
