@@ -5,8 +5,7 @@ FROM ${IMAGE}
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN dnf -y update \
-    && dnf install -y --nodocs pciutils \
+RUN dnf install -y --nodocs pciutils \
     && dnf clean all && rm -rf /var/cache/*
 
 USER root
@@ -26,3 +25,8 @@ ENV OLLAMA_MODELS /ollama/models
 
 ENTRYPOINT ["/usr/local/bin/ollama"]
 CMD ["serve"]
+
+LABEL \
+      org.opencontainers.image.description.vendor="ollama" \
+      org.opencontainers.image.description="A UBI container used to run ollama" \
+      org.opencontainers.image.source="https://github.com/redhat-na-ssa/demo-ollama"
