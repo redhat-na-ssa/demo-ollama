@@ -46,5 +46,6 @@ curl ${OLLAMA_HOST}/api/tags | jq
 Run gradio chat client
 
 ```sh
+export OLLAMA_HOST
 python client/00-ollama-chat.py
 ```
