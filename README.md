@@ -10,7 +10,7 @@ This repo contains information on how to deploy ollama on OpenShift.
     - `g4dn.2xlarge`
     - `g5.2xlarge`
 
-## Quickstart
+## Installation Quickstart
 
 ```sh
 oc apply -k deploy
