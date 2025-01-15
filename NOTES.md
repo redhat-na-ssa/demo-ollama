@@ -37,14 +37,12 @@ curl ${OLLAMA_HOST}/api/tags | jq
 ```sh
 cd ollama
 podman-compose up
-
-OLLAMA_HOST=http://localhost:11434
+export OLLAMA_HOST=http://localhost:11434
 ```
 
 Run gradio chat client
 
 ```sh
-export OLLAMA_HOST
 python client/00-ollama-chat.py
 ```
 Localhost (compose)
