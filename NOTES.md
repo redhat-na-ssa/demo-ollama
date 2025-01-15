@@ -1,19 +1,8 @@
 # Demo ollama on OpenShift
 
-
-
 ## Testing
 
-Localhost (compose)
-
-```sh
-cd ollama
-podman-compose up
-
-OLLAMA_HOST=http://localhost:11434
-```
-
-OpenShift
+### OpenShift
 
 ```sh
 oc apply -k deploy
@@ -22,14 +11,14 @@ OLLAMA_HOST=http://$(oc get route -n ollama --output=custom-columns=':.spec.host
 echo ${OLLAMA_HOST}
 ```
 
-Test `minilm`
+Pull and test the `minilm` embeddings model.
 
 ```sh
 curl -sL ${OLLAMA_HOST}/api/pull -d '{"name": "all-minilm"}'
 curl -sL ${OLLAMA_HOST}/api/embed -d '{ "model": "all-minilm", "input": "hello" }'
 ```
 
-Test `granite3-dense:8b`
+Pull and test the `granite3-dense:8b` LLM.
 
 ```sh
 PROMPT="hello"
@@ -37,10 +26,19 @@ curl -sL ${OLLAMA_HOST}/api/pull -d '{"name": "granite3-dense:8b"}'
 curl -sL ${OLLAMA_HOST}/api/generate -d '{"model": "granite3-dense:8b", "prompt": "'${PROMPT}'", "stream": false }' | jq .response
 ```
 
-View available models
+View available cached models.
 
 ```sh
 curl ${OLLAMA_HOST}/api/tags | jq
+```
+
+### Local testing
+
+```sh
+cd ollama
+podman-compose up
+
+OLLAMA_HOST=http://localhost:11434
 ```
 
 Run gradio chat client
@@ -49,3 +47,4 @@ Run gradio chat client
 export OLLAMA_HOST
 python client/00-ollama-chat.py
 ```
+Localhost (compose)
