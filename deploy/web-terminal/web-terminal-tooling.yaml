@@ -18,10 +18,10 @@ spec:
             #!/bin/bash
 
             echo "
-            GIT_REPO=https://github.com/adrezni/cluster-jump-start.git
+            GIT_REPO=https://github.com/redhat-na-ssa/demo-ollama.git
 
-            [ -e ~/cluster-jump-start ] || git clone \${GIT_REPO}
-            [ -e ~/cluster-jump-start ] && cd ~/cluster-jump-start
+            [ -e ~/demo-ollama ] || git clone \${GIT_REPO}
+            [ -e ~/demo-ollama ] && cd ~/demo-ollama
 
             " >> /home/user/.bashrc
 
