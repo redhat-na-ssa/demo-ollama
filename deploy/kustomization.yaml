@@ -1,11 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: ollama
-
-resources:
-  - deployment.yaml
-  - namespace.yaml
-  - pvc.yaml
-  - route.yaml
-  - svc.yaml
+components:
+- branding
+# - nvidia-gpu-autoscale
+- ollama-gpu
+- web-terminal

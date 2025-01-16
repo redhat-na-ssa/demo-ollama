@@ -2,8 +2,8 @@
 version: '3'
 services:
   ollama:
-    build: .
-    # image: ghcr.io/redhat-na-ssa/ollama:latest
+    # build: .
+    image: ghcr.io/redhat-na-ssa/ollama:latest
     env:
       - OLLAMA_HOST: '0.0.0.0:11434'
     ports:

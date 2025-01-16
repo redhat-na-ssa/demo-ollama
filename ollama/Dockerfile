@@ -2,8 +2,8 @@
 ARG IMAGE=docker.io/nvidia/cuda:12.6.3-devel-ubi9
 FROM ${IMAGE}
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
 RUN dnf install -y --nodocs pciutils \
     && dnf clean all && rm -rf /var/cache/*
@@ -12,7 +12,7 @@ USER root
 
 WORKDIR /ollama
 
-ENV OLLAMA_VERSION 0.5.4
+ENV OLLAMA_VERSION=0.5.4
 
 RUN chmod 770 /ollama && \
     chgrp root /ollama && \
@@ -21,9 +21,9 @@ RUN chmod 770 /ollama && \
 EXPOSE 8080
 USER 1001
 
-ENV OLLAMA_HOST 0.0.0.0:11434
-#ENV OLLAMA_ORIGINS  http://localhost:*,http://0.0.0.0:*
-ENV OLLAMA_MODELS /ollama/models
+ENV HOME=/ollama \
+    OLLAMA_HOST=0.0.0.0:11434 \
+    OLLAMA_MODELS=/ollama/models
 
 ENTRYPOINT ["/usr/local/bin/ollama"]
 CMD ["serve"]

@@ -1,19 +1,8 @@
 # Demo ollama on OpenShift
 
+## Notes
 
-
-## Testing
-
-Localhost (compose)
-
-```sh
-cd ollama
-podman-compose up
-
-OLLAMA_HOST=http://localhost:11434
-```
-
-OpenShift
+### OpenShift
 
 ```sh
 oc apply -k deploy
@@ -22,29 +11,43 @@ OLLAMA_HOST=http://$(oc get route -n ollama --output=custom-columns=':.spec.host
 echo ${OLLAMA_HOST}
 ```
 
-Test `minilm`
+Pull and test the `minilm` model. It it used to convert words to vectors.
 
 ```sh
-curl ${OLLAMA_HOST}/api/pull -d '{"name": "all-minilm"}'
-curl ${OLLAMA_HOST}/api/embed -d '{ "model": "all-minilm", "input": "hello" }'
+curl -sL ${OLLAMA_HOST}/api/pull -d '{"name": "all-minilm"}'
+curl -sL ${OLLAMA_HOST}/api/embed -d '{ "model": "all-minilm", "input": "hello" }'
 ```
 
-Test `granite3-dense:8b`
+Pull and test the `granite3-dense:8b` large language model.
 
 ```sh
 PROMPT="hello"
-curl ${OLLAMA_HOST}/api/pull -d '{"name": "granite3-dense:8b"}'
-curl ${OLLAMA_HOST}/api/generate -d '{"model": "granite3-dense:8b", "prompt": "'${PROMPT}'", "stream": false }'
+curl -sL ${OLLAMA_HOST}/api/pull -d '{"name": "granite3-dense:8b"}'
+curl -sL ${OLLAMA_HOST}/api/generate -d '{"model": "granite3-dense:8b", "prompt": "'${PROMPT}'", "stream": false }' | jq .response
 ```
 
-View available models
+View available cached models.
 
 ```sh
 curl ${OLLAMA_HOST}/api/tags | jq
 ```
 
-Run gradio chat client
+### Local testing
+
+Localhost (compose)
 
 ```sh
-python client/00-ollama-chat.py
+cd ollama
+podman-compose up
+```
+
+Run gradio chat client (locally)
+
+```sh
+python -m venv venv
+. venv/bin/activate
+pip install -r requirements.txt
+
+export OLLAMA_HOST
+python client/app.py
 ```

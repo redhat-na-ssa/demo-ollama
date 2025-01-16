@@ -5,12 +5,12 @@ This repo contains information on how to deploy ollama on OpenShift.
 ## Requirements
 
 - OpenShift >= 4.15
-- A worker node with a GPU - **Highly Recommended**
+- A GPU worker node with at least 16GB of GPU memory.
   - AWS
     - `g4dn.2xlarge`
     - `g5.2xlarge`
 
-## Quickstart
+## Installation Quickstart
 
 ```sh
 oc apply -k deploy
