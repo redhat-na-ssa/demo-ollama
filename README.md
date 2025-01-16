@@ -16,7 +16,7 @@ This repo contains information on how to deploy ollama on OpenShift.
 oc apply -k deploy
 ```
 
-See [Additional Info](NOTES.md)
+See [Additional info](NOTES.md) on how to pull and test models.
 
 ## Links
 
