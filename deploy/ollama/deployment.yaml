@@ -37,7 +37,7 @@ spec:
             until curl -sL ${OLLAMA_HOST}/api/pull -d '{"name": "'${MODEL_NAME}'"}'
             do
               sleep 6
-              
+
             done
           }
 
