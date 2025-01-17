@@ -19,20 +19,41 @@ spec:
       - name: serve
         image: ghcr.io/redhat-na-ssa/ollama:latest
         imagePullPolicy: Always
-        env:
+        # env:
         # - name: HOME
         #   value: /ollama
         # - name: OLLAMA_HOST
         #   value: 0.0.0.0:11434
+        command:
+        - /bin/sh
+        - -c
+        - |
+          #/bin/sh
+
+          pull_model(){
+            OLLAMA_HOST=localhost:11434
+            MODEL_NAME=granite3-dense:8b
+
+            until curl -sL ${OLLAMA_HOST}/api/pull -d '{"name": "'${MODEL_NAME}'"}'
+            do
+              sleep 6
+
+            done
+          }
+
+          serve_ollama(){
+            /usr/local/bin/ollama serve
+          }
+
+          pull_model &
+          serve_ollama
+
         ports:
         - containerPort: 11434
           protocol: TCP
         resources:
           limits:
             memory: 10Gi
-        #     nvidia.com/gpu: "1"
-        #   requests:
-        #     nvidia.com/gpu: "1"
         volumeMounts:
         - mountPath: /ollama
           name: storage

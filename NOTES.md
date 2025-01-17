@@ -1,6 +1,6 @@
 # Demo ollama on OpenShift
 
-## Testing
+## Notes
 
 ### OpenShift
 
@@ -34,15 +34,20 @@ curl ${OLLAMA_HOST}/api/tags | jq
 
 ### Local testing
 
+Localhost (compose)
+
 ```sh
 cd ollama
 podman-compose up
 ```
 
-Run gradio chat client
+Run gradio chat client (locally)
 
 ```sh
-OLLAMA_HOST=http://localhost:11434
-python client/00-ollama-chat.py
+python -m venv venv
+. venv/bin/activate
+pip install -r requirements.txt
+
+export OLLAMA_HOST
+python client/app.py
 ```
-Localhost (compose)
