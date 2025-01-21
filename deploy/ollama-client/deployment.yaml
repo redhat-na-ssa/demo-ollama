@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-client
+  annotations:
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"ollama-client:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"ollama-client\")].image","pause":"false"}]'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama-client
+      deployment: ollama-client
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: ollama-client
+        deployment: ollama-client
+    spec:
+      containers:
+      - image: ollama-client:latest
+        env:
+        - name: OLLAMA_HOST
+          value: http://ollama
+        name: ollama-client
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+      volumes:
+      - name: empty
+        emptyDir: {}

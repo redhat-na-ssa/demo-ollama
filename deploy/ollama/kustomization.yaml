@@ -4,11 +4,11 @@ kind: Component
 namespace: ollama
 
 commonlabels:
-  app: ollama
+  demo: ollama
+
+components:
+- ../ollama-client
+- ../ollama-serve
 
 resources:
-  - deployment.yaml
-  - namespace.yaml
-  - pvc.yaml
-  - route.yaml
-  - svc.yaml
+- namespace.yaml
