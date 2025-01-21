@@ -9,7 +9,6 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: ollama-client
     deployment: ollama-client
   sessionAffinity: None
   type: ClusterIP
