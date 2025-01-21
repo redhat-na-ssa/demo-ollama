@@ -12,12 +12,22 @@ This repo contains information on how to deploy ollama on OpenShift.
 
 ## Installation Quickstart
 
+Use CPU only
+
+```sh
+# setup ollama
+until oc apply -k deploy; do : ; done
+```
+
+Use Nvidia GPUs
+
 ```sh
 # setup nvidia gpu nodes
 until oc apply -k deploy/nvidia-gpu-autoscale; do : ; done
 
 # setup ollama
 until oc apply -k deploy; do : ; done
+until oc apply -k deploy/ollama-gpu; do : ; done
 ```
 
 See [these additional notes on how to pull and test models](NOTES.md).

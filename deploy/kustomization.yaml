@@ -4,5 +4,5 @@ kind: Kustomization
 components:
 - branding
 # - nvidia-gpu-autoscale
-- ollama-gpu
+- ollama
 - web-terminal
