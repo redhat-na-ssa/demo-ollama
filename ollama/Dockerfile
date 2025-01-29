@@ -1,4 +1,3 @@
-# IMAGE=docker.io/nvidia/cuda:12.6.3-runtime-ubi9
 ARG IMAGE=docker.io/nvidia/cuda:12.6.3-devel-ubi9
 FROM ${IMAGE}
 

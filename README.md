@@ -34,6 +34,7 @@ See [these additional notes on how to pull and test models](NOTES.md).
 
 ## Links
 
+- [Containerfile / Dockerfile](ollama/Dockerfile)
 - [Github - ollama](https://github.com/ollama/ollama)
 - [docker.io - ollama container](https://hub.docker.com/r/ollama/ollama)
 - [Github - ollama UBI container](https://github.com/williamcaban/ollama-ubi)
