@@ -5,4 +5,4 @@ components:
 - branding
 # - nvidia-gpu-autoscale
 - ollama
-- web-terminal
+# - web-terminal

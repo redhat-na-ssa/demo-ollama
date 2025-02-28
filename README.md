@@ -30,6 +30,11 @@ until oc apply -k deploy; do : ; done
 until oc apply -k deploy/ollama-gpu; do : ; done
 ```
 
+```sh
+# setup web terminal (optional)
+until oc apply -k deploy/web-terminal; do : ; done
+```
+
 See [these additional notes on how to pull and test models](NOTES.md).
 
 ## Links
