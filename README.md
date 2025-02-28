@@ -22,16 +22,19 @@ until oc apply -k deploy; do : ; done
 Use Nvidia GPU
 
 ```sh
-# setup nvidia gpu nodes
+# setup nvidia gpu nodes (prerequisite)
 until oc apply -k deploy/nvidia-gpu-autoscale; do : ; done
+```
 
-# setup ollama
+```sh
+# setup ollama w/ gpu
 until oc apply -k deploy; do : ; done
 until oc apply -k deploy/ollama-gpu; do : ; done
 ```
 
+Setup Web Terminal (optional)
+
 ```sh
-# setup web terminal (optional)
 until oc apply -k deploy/web-terminal; do : ; done
 ```
 
