@@ -19,7 +19,7 @@ Use CPU only
 until oc apply -k deploy; do : ; done
 ```
 
-Use Nvidia GPUs
+Use Nvidia GPU
 
 ```sh
 # setup nvidia gpu nodes
