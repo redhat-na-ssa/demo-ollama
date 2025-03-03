@@ -2,18 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ollama
-  namespace: ollama
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ollama
+      deployment: ollama
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: ollama
+        deployment: ollama
     spec:
       containers:
       - name: serve

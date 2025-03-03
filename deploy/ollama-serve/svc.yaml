@@ -9,5 +9,5 @@ spec:
     protocol: TCP
     targetPort: 11434
   selector:
-    app: ollama
+    deployment: ollama
   type: ClusterIP
