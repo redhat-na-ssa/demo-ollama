@@ -31,7 +31,7 @@ spec:
 
           pull_model(){
             OLLAMA_HOST=localhost:11434
-            MODEL_NAME=granite3-dense:8b
+            MODEL_NAME=granite3.3:latest
 
             until curl -sL ${OLLAMA_HOST}/api/pull -d '{"name": "'${MODEL_NAME}'"}'
             do
