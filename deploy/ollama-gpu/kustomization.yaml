@@ -14,9 +14,9 @@ patches:
         value:
           limits:
             memory: 10Gi
-            nvidia.com/gpu: "4"
+            nvidia.com/gpu: "1"
           requests:
-            nvidia.com/gpu: "4"
+            nvidia.com/gpu: "1"
     patch: |-
       - op: add
         path: /spec/template/spec/containers/0/env
