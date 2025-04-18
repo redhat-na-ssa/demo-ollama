@@ -17,3 +17,11 @@ patches:
             nvidia.com/gpu: "1"
           requests:
             nvidia.com/gpu: "1"
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: OLLAMA_SCHED_SPREAD
+            value: "1"
+          - name: OLLAMA_NUM_PARALLEL
+            value: "1"
