@@ -7,7 +7,7 @@
 ```sh
 oc apply -k deploy
 
-OLLAMA_HOST=http://$(oc get route -n ollama --output=custom-columns=':.spec.host' --no-headers)
+OLLAMA_HOST=http://$(oc get route ollama -n ollama --output=custom-columns=':.spec.host' --no-headers)
 echo ${OLLAMA_HOST}
 ```
 
